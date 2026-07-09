@@ -16,6 +16,8 @@
 
 html { scroll-behavior: smooth; }
 
+
+
 body {
   margin: 0;
   background: #eadfce;
@@ -540,4 +542,120 @@ time {
     grid-template-columns: 1fr;
   }
 }
+/* ============================= */
+/* AJUSTES RESPONSIVOS - CELULAR */
+/* ============================= */
 
+/* ============================= */
+/* AJUSTES RESPONSIVOS - CELULAR */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  header {
+    padding: 12px;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+  }
+
+  nav a {
+    font-size: 0.85rem;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: 40px;
+    overflow: hidden;
+  }
+
+  .hero img,
+  .hero .foto-turma {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero h1 {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    font-size: clamp(2rem, 10vw, 3rem);
+    line-height: 0.95;
+    text-align: center;
+    z-index: 3;
+  }
+
+  .post-it {
+    transform: scale(0.75);
+    z-index: 4;
+  }
+
+  .post-it.rosa {
+    top: 90px;
+    left: 8px;
+  }
+
+  .post-it.amarelo {
+    top: 90px;
+    right: 8px;
+  }
+
+  .post-it.azul {
+    bottom: 20px;
+    left: 8px;
+  }
+
+  .post-it.roxo {
+    bottom: 20px;
+    right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  header {
+    position: relative;
+  }
+
+  .hero {
+    padding-top: 20px;
+  }
+
+  .hero h1 {
+    top: 135px;
+    font-size: 2.3rem;
+  }
+
+  .post-it {
+    font-size: 0.7rem;
+    width: 95px;
+    min-height: 75px;
+    padding: 10px;
+  }
+
+  .post-it.azul,
+  .post-it.roxo {
+    bottom: 10px;
+  }
+}
