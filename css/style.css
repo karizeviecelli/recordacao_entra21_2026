@@ -1,44 +1,161 @@
+/* ======================================== */
+/*  PORTAL DE RECORDAÇÕES - TEMA ESCURO     */
+/*  Refatoração completa com CSS Variables   */
+/* ======================================== */
 
 :root {
-  --nav: #061a2a;
-  --paper: #fffdf8;
-  --cream: #f7efe1;
-  --ink: #17212b;
-  --muted: #64707d;
-  --yellow: #ffd85d;
-  --pink: #ff7ea8;
-  --blue-note: #9fe8f4;
-  --purple: #d6b6ff;
-  --green: #a8e57d;
+  /* Fundos */
+  --bg-body: #080c16;
+  --bg-pagina: #0d1322;
+  --bg-header: #060912;
+  --bg-section: #0f1628;
+  --bg-section-alt: #131b2e;
+  --bg-card: #182035;
+  --bg-card-hover: #1f2842;
+  --bg-hero-overlay: rgba(0, 0, 0, 0.65);
+  --bg-mensagem: #0a0f1d;
+
+  /* Textos */
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-header: #f1f5f9;
+  --text-hero: #ffffff;
+  --text-card: #cbd5e1;
+  --text-card-role: #8899b0;
+
+  /* Acentos */
+  --accent-gold: #fbbf24;
+  --accent-gold-light: #fde68a;
+  --accent-orange: #f59e0b;
+  --accent-blue: #60a5fa;
+
+  /* Post-its (tema escuro - mais sóbrios) */
+  --post-rosa: #be6383;
+  --post-amarelo: #b8963a;
+  --post-azul: #3d7a9e;
+  --post-lilas: #7a5fa8;
+  --post-text: #1a1a2e;
+
+  /* Bordas e sombras */
+  --border-card: #1e2940;
+  --border-subtle: #1a2438;
+  --shadow-card: rgba(0, 0, 0, 0.35);
+  --shadow-lg: rgba(0, 0, 0, 0.5);
+
+  /* Decorativo */
+  --hero-min-height: 480px;
 }
 
-* { box-sizing: border-box; }
+/* ======================================== */
+/*  TEMA CLARO (opcional, via classe)       */
+/* ======================================== */
+.light-mode {
+  --bg-body: #eadfce;
+  --bg-pagina: #fffdf8;
+  --bg-header: #061a2a;
+  --bg-section: #ffffff;
+  --bg-section-alt: #fbf4e5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f8f8fc;
+  --bg-hero-overlay: rgba(0, 0, 0, 0.55);
+  --bg-mensagem: #f0f0f5;
 
-html { scroll-behavior: smooth; }
+  --text-primary: #17212b;
+  --text-secondary: #64707d;
+  --text-muted: #87919b;
+  --text-header: #ffffff;
+  --text-hero: #ffffff;
+  --text-card: #333333;
+  --text-card-role: #777777;
 
+  --accent-gold: #e8a317;
+  --accent-gold-light: #ffd700;
+  --accent-orange: #e67e22;
+  --accent-blue: #3498db;
 
+  --post-rosa: #f8b4c8;
+  --post-amarelo: #f7dc6f;
+  --post-azul: #85c1e9;
+  --post-lilas: #c39bd3;
+  --post-text: #2c3440;
+
+  --border-card: #d7d7d7;
+  --border-subtle: #e5e5e5;
+  --shadow-card: rgba(0, 0, 0, 0.08);
+  --shadow-lg: rgba(0, 0, 0, 0.22);
+}
+
+/* ======================================== */
+/*  GLOBAIS                                 */
+/* ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  background: #eadfce;
-  color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
 }
+
 
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Página mais larga para valorizar a foto da turma */
+/* ======================================== */
+/*  BOTÃO ALTERNAR TEMA                     */
+/* ======================================== */
+.toggle-tema {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: var(--bg-header);
+  color: var(--accent-gold);
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s, background 0.3s, border-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.toggle-tema:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-gold);
+}
+
+/* ======================================== */
+/*  PÁGINA                                  */
+/* ======================================== */
 .pagina {
   width: min(100%, 1140px);
   margin: 0 auto;
-  background: var(--paper);
-  box-shadow: 0 0 28px rgba(0,0,0,.22);
+  background: var(--bg-pagina);
+  box-shadow: 0 0 40px var(--shadow-lg);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
-/* TOPO */
+/* ======================================== */
+/*  TOPO / HEADER                           */
+/* ======================================== */
 .topo {
   min-height: 78px;
   padding: 0 26px;
@@ -46,19 +163,23 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  background: var(--nav);
-  color: #fff;
+  background: var(--bg-header);
+  color: var(--text-header);
+  transition: background 0.3s;
 }
 
 .logo {
   flex: 0 0 auto;
-  color: var(--yellow);
+  color: var(--accent-gold);
   font-family: "Comic Sans MS", "Segoe Print", cursive;
   font-size: 1.5rem;
   font-weight: 700;
+  transition: color 0.3s;
 }
 
-.logo span { color: #fff6a8; }
+.logo span {
+  color: var(--accent-gold-light);
+}
 
 nav {
   display: flex;
@@ -69,13 +190,33 @@ nav {
   font-weight: 700;
 }
 
-nav a:hover { color: var(--yellow); }
+nav a {
+  color: var(--text-header);
+  opacity: .85;
+  transition: opacity 0.2s, color 0.2s;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
 
-/* HERO COM FOTO REAL */
+nav a:hover {
+  opacity: 1;
+  color: var(--accent-gold);
+  border-bottom-color: var(--accent-gold);
+}
+
+/* ======================================== */
+/*  HERO                                    */
+/* ======================================== */
 .hero {
   position: relative;
   width: 100%;
   overflow: hidden;
+}
+
+.foto-turma {
+  width: 100%;
+  display: block;
+  line-height: 0;
 }
 
 .hero img,
@@ -85,76 +226,12 @@ nav a:hover { color: var(--yellow); }
   display: block;
 }
 
-/* Fundo com a imagem da turma */
-.foto-turma{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    object-position:center;
-    display:block;
-    background:#17212b;
-}
-/* Caso seu banner esteja dentro de uma pasta img, troque acima por:
-   url("img/banner.jpeg");
-*/
 
 
 
-.titulo-hero {
-  position: absolute;
-  top: 34px;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 760px;
-  padding: 0 16px;
-  text-align: center;
-  text-shadow: 0 4px 14px rgba(0,0,0,.75);
-  z-index: 5;
-}
-
-
-.coroa {
-  color: var(--yellow);
-  font-size: 1.8rem;
-  line-height: 1;
-}
-
-h1 {
-  margin: 0;
-  font-family: "Comic Sans MS", "Segoe Print", cursive;
-  font-size: clamp(2rem, 5vw, 3.8rem);
-  line-height: .96;
-  letter-spacing: 0;
-  color: var(--yellow);
-  padding: 50px 0 0;
-  
-}
-
-.titulo-hero p {
-  margin: 18px auto 22px;
-  max-width: 750px;
-  font-size: 1.15rem;
-  line-height: 1.45;
-  padding: 0 12px;
-}
-
-.titulo-hero a {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: baseline;
-  justify-content: center;
-  padding: 0 28px;
-  margin-top: 245px;
-  border-radius: 999px;
-  background: var(--yellow);
-  color: #563f05;
-  font-size: 1rem;
-  font-weight: 900;
-  text-shadow: none;
-  box-shadow: 0 8px 18px rgba(0,0,0,.28);
-}
-
-/* POST-ITS */
+/* ======================================== */
+/*  POST-ITS                                */
+/* ======================================== */
 .post {
   position: absolute;
   z-index: 4;
@@ -165,46 +242,118 @@ h1 {
   flex-direction: column;
   justify-content: center;
   border-radius: 3px;
-  color: #2c3440;
+  color: var(--post-text);
   font-family: "Comic Sans MS", "Segoe Print", cursive;
   font-size: .98rem;
   line-height: 1.18;
-  box-shadow: 0 10px 18px rgba(0,0,0,.22);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .4);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
 }
-
-.post strong { margin-bottom: 4px; }
 
 .post-rosa {
   left: 24px;
   top: 28px;
-  background: var(--pink);
+  background: var(--post-rosa);
   transform: rotate(-5deg);
 }
 
 .post-azul {
   left: 24px;
   bottom: 46px;
-  background: var(--blue-note);
+  background: var(--post-azul);
   transform: rotate(5deg);
 }
 
 .post-amarelo {
   right: 24px;
   top: 28px;
-  background: #ffe47c;
+  background: var(--post-amarelo);
   transform: rotate(5deg);
 }
 
 .post-lilas {
   right: 24px;
   bottom: 46px;
-  background: var(--purple);
+  background: var(--post-lilas);
   transform: rotate(-5deg);
 }
 
-/* SEÇÕES */
+/* ======================================== */
+/*  TÍTULO DO HERO                          */
+/* ======================================== */
+.titulo-hero {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 760px;
+  width: 90%;
+  padding: 14px 24px;
+  text-align: center;
+  background: var(--bg-hero-overlay);
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 5;
+  transition: background 0.3s;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Comic Sans MS", "Segoe Print", cursive;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  color: #ffffff;
+}
+.titulo-hero p {
+  margin: 12px auto 16px;
+  max-width: 650px;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  color: #d1d5db;
+}
+
+.titulo-hero a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+  border-radius: 8px;
+  background: var(--accent-gold);
+  color: #0a0e17;
+  font-size: 1rem;
+  font-weight: 800;
+  text-shadow: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .3);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.titulo-hero a:hover {
+  background: var(--accent-gold-light);
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .4);
+}
+
+/* ======================================== */
+/*  SEÇÕES                                  */
+/* ======================================== */
 .secao {
-  padding: 36px 28px 42px;
+  padding: 40px 28px 48px;
+  background: var(--bg-section);
+  transition: background 0.3s;
+}
+/* Adicionar depois do bloco de seções */
+.secao, .hero, .mensagem-final {
+  scroll-margin-top: 90px;
+}
+
+.linha {
+  background: var(--bg-section-alt);
+}
+
+.recordacoes {
+  background: var(--bg-section);
 }
 
 .titulo-secao {
@@ -212,7 +361,7 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .titulo-secao h2 {
@@ -221,17 +370,21 @@ h1 {
   font-size: 2.3rem;
   line-height: 1;
   letter-spacing: 0;
+  color: var(--text-primary);
+  transition: color 0.3s;
 }
 
 .titulo-secao i {
   width: 28px;
   height: 24px;
   background:
-    linear-gradient(115deg, transparent 42%, #ffc940 42% 56%, transparent 56%),
-    linear-gradient(25deg, transparent 42%, #ff8c2a 42% 56%, transparent 56%);
+    linear-gradient(115deg, transparent 42%, var(--accent-gold) 42% 56%, transparent 56%),
+    linear-gradient(25deg, transparent 42%, var(--accent-orange) 42% 56%, transparent 56%);
 }
 
-/* TURMA */
+/* ======================================== */
+/*  GRADE DE ALUNOS (CARDS)                 */
+/* ======================================== */
 .grade-alunos {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -239,33 +392,31 @@ h1 {
 }
 
 .card {
-  padding: 7px 7px 9px;
+  padding: 12px 10px 14px;
   display: flex;
   flex-direction: column;
   gap: 6px;
   align-items: center;
-  background: #fff;
-  border: 1px solid #d7d7d7;
-  box-shadow: 0 5px 12px rgba(0,0,0,.13);
-  transition: transform .18s ease, box-shadow .18s ease;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px var(--shadow-card);
+  transition: transform .18s ease, box-shadow .18s ease, background 0.3s, border-color 0.3s;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 18px rgba(0,0,0,.18);
+  box-shadow: 0 10px 20px var(--shadow-card);
+  background: var(--bg-card-hover);
 }
 
 .foto {
   width: 80px;
   height: 80px;
-  display: grid;
-  place-items: center;
   border-radius: 50%;
-  border: 2px solid #df7009;
-  color: #fff;
-  font-weight: 900;
-  font-size: 1.45rem;
-  transition: all .18s ease;
+  object-fit: cover;
+  border: 3px solid var(--accent-gold);
+  transition: border-color 0.3s;
 }
 
 .card strong {
@@ -273,41 +424,43 @@ h1 {
   text-align: center;
   font-size: .73rem;
   overflow-wrap: anywhere;
+  color: var(--text-card);
+  transition: color 0.3s;
 }
 
 .card em {
   width: 100%;
-  padding: 5px 3px;
-  border-radius: 3px;
-  background: #ff6f91;
-  color: #fff;
+  padding: 6px 4px;
+  border-radius: 6px;
+  background: var(--accent-gold);
+  color: #0a0e17;
   text-align: center;
   font-size: .55rem;
   font-style: normal;
   font-weight: 800;
+  transition: background 0.3s, color 0.3s;
 }
 
-.card:nth-child(2n) em { background: #ffc145; color: #3a2a03; }
-.card:nth-child(3n) em { background: #58c7b3; }
-.card:nth-child(4n) em { background: #55a7ff; }
-.card:nth-child(5n) em { background: #8b65d8; }
+.card:nth-child(2n) em {
+  background: var(--accent-orange);
+  color: #0a0e17;
+}
+.card:nth-child(3n) em {
+  background: #3b82f6;
+  color: #fff;
+}
+.card:nth-child(4n) em {
+  background: #8b5cf6;
+  color: #fff;
+}
+.card:nth-child(5n) em {
+  background: #06b6d4;
+  color: #0a0e17;
+}
 
-.f1 { background: linear-gradient(135deg,#ff8fa3,#ffbd59); }
-.f2 { background: linear-gradient(135deg,#4ea1ff,#65d6c4); }
-.f3 { background: linear-gradient(135deg,#b273ff,#ff8fb9); }
-.f4 { background: linear-gradient(135deg,#2fb18f,#9de36f); }
-.f5 { background: linear-gradient(135deg,#f97316,#facc15); }
-.f6 { background: linear-gradient(135deg,#3b82f6,#8b5cf6); }
-.f7 { background: linear-gradient(135deg,#ec4899,#f59e0b); }
-.f8 { background: linear-gradient(135deg,#0ea5e9,#14b8a6); }
-.f9 { background: linear-gradient(135deg,#22c55e,#84cc16); }
-.f10 { background: linear-gradient(135deg,#64748b,#2563eb); }
-.f11 { background: linear-gradient(135deg,#f43f5e,#a855f7); }
-.f12 { background: linear-gradient(135deg,#06b6d4,#7c3aed); }
-
-/* LINHA DO TEMPO */
-.linha { background: #fbf4e5; }
-
+/* ======================================== */
+/*  LINHA DO TEMPO                          */
+/* ======================================== */
 .eventos {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -325,8 +478,9 @@ h1 {
   position: absolute;
   top: 33px;
   right: -10px;
-  color: #87919b;
+  color: var(--text-muted);
   font-size: 1.4rem;
+  transition: color 0.3s;
 }
 
 .icone {
@@ -335,34 +489,39 @@ h1 {
   margin: 0 auto 8px;
   display: grid;
   place-items: center;
-  border: 2px solid #1d3950;
+  border: 2px solid var(--accent-gold);
   border-radius: 50%;
-  background: #fff;
+  background: var(--bg-card);
   font-size: 1.65rem;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 time {
   display: block;
-  color: #0086c8;
+  color: var(--accent-blue);
   font-size: .75rem;
   font-weight: 900;
+  transition: color 0.3s;
 }
 
 .eventos h3 {
   margin: 5px 0;
   font-size: .76rem;
+  color: var(--text-primary);
+  transition: color 0.3s;
 }
 
 .eventos p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-secondary);
   font-size: .68rem;
   line-height: 1.35;
+  transition: color 0.3s;
 }
 
-/* RECORDAÇÕES */
-.recordacoes { background: #fffdf8; }
-
+/* ======================================== */
+/*  NOTAS / RECORDAÇÕES                     */
+/* ======================================== */
 .notas {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -372,69 +531,98 @@ time {
 .notas blockquote {
   min-height: 126px;
   margin: 0;
-  padding: 15px 12px;
+  padding: 15px 14px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-family: "Comic Sans MS", "Segoe Print", cursive;
   font-size: .78rem;
   line-height: 1.28;
-  box-shadow: 0 8px 15px rgba(0,0,0,.18);
+  border-radius: 8px;
+  box-shadow: 0 6px 14px var(--shadow-card);
+  transition: box-shadow 0.3s;
 }
 
 .notas cite {
   margin-top: 10px;
   font-style: normal;
   font-weight: 900;
+  color: rgba(0, 0, 0, 0.6);
 }
 
-.n1 { background: #ffe27a; transform: rotate(-2deg); }
-.n2 { background: #8ee6ff; transform: rotate(2deg); }
-.n3 { background: #ff9ebe; transform: rotate(-1deg); }
-.n4 { background: #b7ef8d; transform: rotate(2deg); }
+.n1 {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a2e;
+  transform: rotate(-1.5deg);
+}
+.n2 {
+  background: linear-gradient(135deg, #38bdf8, #3b82f6);
+  color: #fff;
+  transform: rotate(1.5deg);
+}
+.n3 {
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  color: #fff;
+  transform: rotate(-1deg);
+}
+.n4 {
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  color: #1a1a2e;
+  transform: rotate(1deg);
+}
 
-/* MENSAGEM FINAL */
+/* ======================================== */
+/*  MENSAGEM FINAL                          */
+/* ======================================== */
 .mensagem-final {
   position: relative;
-  padding: 34px 28px 40px;
-  background: var(--nav);
-  color: #fff;
+  padding: 40px 28px 46px;
+  background: var(--bg-mensagem);
+  color: var(--text-header);
   text-align: center;
+  border-top: 1px solid var(--border-subtle);
+  transition: background 0.3s, border-color 0.3s;
 }
 
 .mensagem-final::after {
   content: "♡";
   position: absolute;
-  right: 20px;
-  bottom: 12px;
-  color: #ff7ea8;
-  font-size: 3rem;
+  right: 24px;
+  bottom: 14px;
+  color: var(--accent-gold);
+  font-size: 2.5rem;
   line-height: 1;
+  opacity: .5;
 }
 
 .mensagem-final h2 {
   margin: 0 0 14px;
-  color: var(--yellow);
+  color: var(--accent-gold);
   font-family: "Comic Sans MS", "Segoe Print", cursive;
   font-size: 1.8rem;
+  transition: color 0.3s;
 }
 
 .mensagem-final p {
   max-width: 760px;
-  margin: 0 auto 8px;
+  margin: 0 auto 10px;
   font-size: 1rem;
   line-height: 1.65;
+  color: var(--text-secondary);
+  transition: color 0.3s;
 }
 
 .mensagem-final strong {
   display: block;
   margin-top: 12px;
-  color: #ff8fb3;
+  color: var(--accent-gold-light);
   font-family: "Comic Sans MS", "Segoe Print", cursive;
   font-size: 1.05rem;
 }
 
-/* RESPONSIVO */
+/* ======================================== */
+/*  RESPONSIVO - TABLET (≤900px)            */
+/* ======================================== */
 @media (max-width: 900px) {
   .topo {
     height: auto;
@@ -450,165 +638,134 @@ time {
     gap: 10px 14px;
   }
 
-  .hero {
-    min-height: 560px;
-  }
-
-  .foto-fundo {
-    background-position: center top;
-  }
-
-  .titulo-hero {
-    max-width: calc(100% - 220px);
-  }
-
-  h1 {
-    font-size: clamp(3rem, 10vw, 4.5rem);
-  }
-
-  .titulo-hero p {
-    font-size: 1rem;
-  }
-
-  .post {
-    width: 108px;
-    min-height: 118px;
-    padding: 12px 10px;
-    font-size: .85rem;
-  }
-
-  .grade-alunos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .eventos {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .eventos article:not(:last-child)::after {
-    content: "↓";
-    top: auto;
-    right: 50%;
-    bottom: -20px;
-  }
-
-  .notas {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 520px) {
-  .hero {
-    min-height: 600px;
-  }
-
-  .titulo-hero {
-    max-width: calc(100% - 120px);
-    padding-top: 26px;
-  }
-
-  h1 {
-    font-size: 2.35rem;
-  }
-
-  .titulo-hero p {
-    font-size: .82rem;
-  }
-
-  .titulo-hero a {
-    min-height: 44px;
-    padding: 0 20px;
-    font-size: .9rem;
-  }
-
-  .post {
-    width: 76px;
-    min-height: 86px;
-    padding: 8px 7px;
-    font-size: .62rem;
-  }
-
-  .post-rosa { left: 8px; top: 20px; }
-  .post-azul { left: 8px; bottom: 28px; }
-  .post-amarelo { right: 8px; top: 20px; }
-  .post-lilas { right: 8px; bottom: 28px; }
-
-  .grade-alunos {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .notas {
-    grid-template-columns: 1fr;
-  }
-}
-/* ============================= */
-/* AJUSTES RESPONSIVOS - CELULAR */
-/* ============================= */
-
-/* ============================= */
-/* RESPONSIVO - SOBREPOSIÇÃO     */
-/* ============================= */
-/* No breakpoint @media (max-width: 660px) — ajustar: */
-
-/* ============================= */
-/* RESPONSIVO                    */
-/* ============================= */
-
-/* Tablets (até 900px) */
-@media (max-width: 900px) {
-  .topo {
-    height: auto;
-    min-height: 70px;
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 14px 18px;
-  }
-  nav {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px 14px;
-  }
   .hero {
     min-height: auto;
   }
+
   .titulo-hero {
     max-width: calc(100% - 240px);
+    padding: 18px 24px;
   }
+
   h1 {
     font-size: clamp(2.2rem, 6vw, 3.5rem);
   }
+
   .titulo-hero p {
-    font-size: 1rem;
+    font-size: .95rem;
   }
+
   .post {
     width: 108px;
-    min-height: 118px;
-    padding: 12px 10px;
-    font-size: .85rem;
+    min-height: 100px;
+    padding: 10px 10px;
+    font-size: .8rem;
   }
+
   .grade-alunos {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .eventos {
     grid-template-columns: 1fr;
     gap: 18px;
   }
+
   .eventos article:not(:last-child)::after {
     content: "↓";
     top: auto;
     right: 50%;
     bottom: -20px;
   }
+
   .notas {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Celular grande (até 660px) */
+/* ======================================== */
+/*  RESPONSIVO - CELULAR GRANDE (≤660px)    */
+/* ======================================== */
+@media (max-width: 660px) {
+    .topo {
+    padding: 6px 8px;
+  }
+  nav a {
+    font-size: .7rem;
+  }
+  .logo {
+    font-size: 1.1rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  nav {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+
+
+  /* --- HERO --- */
+  .hero {
+    position: relative;
+    min-height: 380px;
+    height: auto;
+    overflow: hidden;
+  }
+   .titulo-hero {
+    bottom: 6px;
+    padding: 5px 10px;
+  }
+  h1 {
+    font-size: .78rem;
+  }
+
+  /* Post-its compactos, 4 cantos DENTRO da foto */
+    .post {
+    width: 34px;
+    min-height: 28px;
+    padding: 2px 2px !important;
+    font-size: .3rem;
+  }
+
+  .post-rosa {
+    left: 6px;
+    top: 8px;
+    transform: rotate(-4deg);
+  }
+  .post-amarelo {
+    right: 6px;
+    top: 8px;
+    transform: rotate(4deg);
+  }
+  .post-azul {
+    left: 6px;
+    bottom: 14px;
+    transform: rotate(3deg);
+  }
+  .post-lilas {
+    right: 6px;
+    bottom: 14px;
+    transform: rotate(-3deg);
+  }
+  .grade-alunos {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .foto {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+  /* Título centralizado abaixo dos rostos */
+ /* No @media (max-width: 660px) - substituir o bloco .titulo-hero */
+
+/* Celular grande (≤660px) */
+/* Celular grande (≤660px) */
 @media (max-width: 660px) {
   .topo {
-    height: auto;
     min-height: 60px;
     flex-direction: column;
     padding: 10px 14px;
@@ -625,67 +782,87 @@ time {
   }
   nav a {
     font-size: .78rem;
+    opacity: .9;
   }
 
+  /* HERO: altura é definida pela IMAGEM, não por min-height */
   .hero {
     position: relative;
-    min-height: 380px;
+    min-height: 0;
     height: auto;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
   }
 
-  /* Post-its compactos, 4 cantos DENTRO da foto */
+  .hero img,
+  .hero .foto-turma {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Post-its proporcionais à imagem */
   .post {
-    width: 56px;
-    min-height: 46px;
+    width: 44px;
+    min-height: 36px;
     padding: 3px 4px !important;
-    font-size: .45rem;
+    font-size: .38rem;
     line-height: 1.05;
     border-radius: 2px;
     z-index: 2;
   }
-  .post-rosa { left: 5px; top: 8px; }
-  .post-amarelo { right: 5px; top: 8px; }
-  .post-azul { left: 5px; bottom: 14px; }   /* ⬅️ sobre as pernas */
-  .post-lilas { right: 5px; bottom: 14px; }  /* ⬅️ sobre as pernas */
+  .post-rosa { left: 4px; top: 4px; transform: rotate(-3deg); }
+  .post-amarelo { right: 4px; top: 4px; transform: rotate(3deg); }
+  .post-azul { left: 4px; bottom: 60px; transform: rotate(2deg); }
+  .post-lilas { right: 4px; bottom: 60px; transform: rotate(-2deg); }
 
-  /* Título centralizado, abaixo dos rostos, com fundo escuro */
+  /* Título na parte inferior, fora dos rostos */
   .titulo-hero {
     position: absolute !important;
-    max-width: 80%;
-    top: 66% !important;
+    max-width: 86%;
+    bottom: 12px !important;
+    top: auto !important;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%) !important;
     text-align: center;
-    background: rgba(0, 0, 0, 0.55);
-    padding: 10px 16px;
-    border-radius: 6px;
-    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 14px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
+
   h1 {
-    font-size: 1.1rem;
-    padding: 0;
+    font-size: .95rem;
     margin: 0 0 2px;
+    padding: 0;
     color: #ffffff !important;
   }
-  .titulo-hero p {
+  h1 span {
     font-size: .7rem;
-    margin: 2px 0 4px;
-    color: #ffffff !important;
+    display: block;
   }
+
+  .titulo-hero p {
+    font-size: .65rem;
+    margin: 2px 0 4px;
+    color: #d1d5db !important;
+  }
+
   .titulo-hero a {
     display: inline-block;
-    min-height: 26px;
+    min-height: 24px;
     padding: 0 12px;
-    font-size: .7rem;
-    line-height: 26px;
+    font-size: .65rem;
+    line-height: 24px;
     margin-top: 0;
     position: static !important;
-    color: #563f05;
+    color: #0a0e17;
   }
 
   .secao {
-    padding: 22px 14px 26px;
+    padding: 24px 14px 30px;
   }
   .titulo-secao h2 {
     font-size: 1.3rem;
@@ -694,12 +871,15 @@ time {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
+  .card {
+    padding: 10px 8px 12px;
+  }
   .card strong {
     font-size: .65rem;
   }
   .card em {
     font-size: .5rem;
-    padding: 4px 2px;
+    padding: 4px 3px;
   }
   .foto {
     width: 52px;
@@ -712,20 +892,106 @@ time {
   .notas blockquote {
     min-height: auto;
     font-size: .7rem;
-    padding: 10px;
+    padding: 12px;
   }
   .mensagem-final {
-    padding: 22px 14px 26px;
+    padding: 24px 14px 30px;
   }
   .mensagem-final h2 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   .mensagem-final p {
-    font-size: .82rem;
+    font-size: .85rem;
+  }
+  .mensagem-final::after {
+    font-size: 1.8rem;
+    right: 14px;
+    bottom: 10px;
+  }
+  .toggle-tema {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    bottom: 16px;
+    right: 16px;
+  }
+
+
+  /* --- SEÇÕES --- */
+  .secao {
+    padding: 24px 14px 30px;
+  }
+
+  .titulo-secao h2 {
+    font-size: 1.3rem;
+  }
+
+  .grade-alunos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .card {
+    padding: 10px 8px 12px;
+  }
+
+  .card strong {
+    font-size: .65rem;
+  }
+
+  .card em {
+    font-size: .5rem;
+    padding: 4px 3px;
+  }
+
+  .foto {
+    width: 52px;
+    height: 52px;
+  }
+
+  .notas {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .notas blockquote {
+    min-height: auto;
+    font-size: .7rem;
+    padding: 12px 12px;
+  }
+
+  .mensagem-final {
+    padding: 24px 14px 30px;
+  }
+
+  .mensagem-final h2 {
+    font-size: 1.2rem;
+  }
+
+  .mensagem-final p {
+    font-size: .85rem;
+  }
+
+  .mensagem-final::after {
+    font-size: 1.8rem;
+    right: 14px;
+    bottom: 10px;
+  }
+
+  .toggle-tema {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    bottom: 16px;
+    right: 16px;
   }
 }
 
-/* Celular pequeno (até 380px) */
+/* ======================================== */
+/*  RESPONSIVO - CELULAR PEQUENO (≤380px)   */
+/* ======================================== */
+
+/* Celular pequeno (≤380px) */
 @media (max-width: 380px) {
   .topo {
     padding: 6px 8px;
@@ -735,38 +1001,46 @@ time {
   }
 
   .hero {
-    min-height: 320px;
+    min-height: 0;
   }
 
   .post {
-    width: 44px;
-    min-height: 36px;
+    width: 36px;
+    min-height: 30px;
     padding: 2px 3px !important;
-    font-size: .38rem;
+    font-size: .32rem;
   }
-  .post-azul { bottom: 10px; }
-  .post-lilas { bottom: 10px; }
+  .post-rosa { left: 3px; top: 3px; }
+  .post-amarelo { right: 3px; top: 3px; }
+  .post-azul { left: 3px; bottom: 50px; }
+  .post-lilas { right: 3px; bottom: 50px; }
 
   .titulo-hero {
-    top: 64% !important;
-    padding: 6px 10px;
+    max-width: 90%;
+    bottom: 8px !important;
+    padding: 5px 8px;
   }
+
   h1 {
-    font-size: .95rem;
+    font-size: .8rem;
+  }
+  h1 span {
+    font-size: .6rem;
   }
   .titulo-hero p {
-    font-size: .62rem;
+    font-size: .55rem;
+    margin: 1px 0 3px;
   }
   .titulo-hero a {
-    min-height: 22px;
+    min-height: 20px;
     padding: 0 8px;
-    font-size: .62rem;
-    line-height: 22px;
+    font-size: .55rem;
+    line-height: 20px;
   }
 
   .grade-alunos {
     grid-template-columns: 1fr 1fr;
-    gap: 5px;
+    gap: 6px;
   }
   .foto {
     width: 40px;
