@@ -1,4 +1,4 @@
-﻿
+
 :root {
   --nav: #061a2a;
   --paper: #fffdf8;
@@ -547,115 +547,229 @@ time {
 /* ============================= */
 
 /* ============================= */
-/* AJUSTES RESPONSIVOS - CELULAR */
+/* RESPONSIVO - SOBREPOSIÇÃO     */
+/* ============================= */
+/* No breakpoint @media (max-width: 660px) — ajustar: */
+
+/* ============================= */
+/* RESPONSIVO                    */
 /* ============================= */
 
-@media (max-width: 768px) {
-
-  header {
-    padding: 12px;
+/* Tablets (até 900px) */
+@media (max-width: 900px) {
+  .topo {
+    height: auto;
+    min-height: 70px;
+    align-items: flex-start;
     flex-direction: column;
-    gap: 10px;
-    align-items: center;
+    padding: 14px 18px;
   }
-
-  .logo {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-
   nav {
-    display: flex;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px 14px;
+    gap: 10px 14px;
   }
-
-  nav a {
-    font-size: 0.85rem;
-  }
-
   .hero {
     min-height: auto;
-    padding-top: 40px;
-    overflow: hidden;
   }
-
-  .hero img,
-  .hero .foto-turma {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    object-position: center top;
-    display: block;
+  .titulo-hero {
+    max-width: calc(100% - 240px);
   }
-
-  .hero h1 {
-    position: absolute;
-    top: 130px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    font-size: clamp(2rem, 10vw, 3rem);
-    line-height: 0.95;
-    text-align: center;
-    z-index: 3;
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
   }
-
-  .post-it {
-    transform: scale(0.75);
-    z-index: 4;
+  .titulo-hero p {
+    font-size: 1rem;
   }
-
-  .post-it.rosa {
-    top: 90px;
-    left: 8px;
+  .post {
+    width: 108px;
+    min-height: 118px;
+    padding: 12px 10px;
+    font-size: .85rem;
   }
-
-  .post-it.amarelo {
-    top: 90px;
-    right: 8px;
+  .grade-alunos {
+    grid-template-columns: repeat(3, 1fr);
   }
-
-  .post-it.azul {
-    bottom: 20px;
-    left: 8px;
+  .eventos {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
-
-  .post-it.roxo {
-    bottom: 20px;
-    right: 8px;
+  .eventos article:not(:last-child)::after {
+    content: "↓";
+    top: auto;
+    right: 50%;
+    bottom: -20px;
+  }
+  .notas {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
-
-  body {
-    overflow-x: hidden;
+/* Celular grande (até 660px) */
+@media (max-width: 660px) {
+  .topo {
+    height: auto;
+    min-height: 60px;
+    flex-direction: column;
+    padding: 10px 14px;
   }
-
-  header {
-    position: relative;
+  .logo {
+    font-size: 1.1rem;
+    text-align: center;
+    width: 100%;
+  }
+  nav {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+  nav a {
+    font-size: .78rem;
   }
 
   .hero {
-    padding-top: 20px;
+    position: relative;
+    min-height: 380px;
+    height: auto;
+    overflow: hidden;
   }
 
-  .hero h1 {
-    top: 135px;
-    font-size: 2.3rem;
+  /* Post-its compactos, 4 cantos DENTRO da foto */
+  .post {
+    width: 56px;
+    min-height: 46px;
+    padding: 3px 4px !important;
+    font-size: .45rem;
+    line-height: 1.05;
+    border-radius: 2px;
+    z-index: 2;
+  }
+  .post-rosa { left: 5px; top: 8px; }
+  .post-amarelo { right: 5px; top: 8px; }
+  .post-azul { left: 5px; bottom: 14px; }   /* ⬅️ sobre as pernas */
+  .post-lilas { right: 5px; bottom: 14px; }  /* ⬅️ sobre as pernas */
+
+  /* Título centralizado, abaixo dos rostos, com fundo escuro */
+  .titulo-hero {
+    position: absolute !important;
+    max-width: 80%;
+    top: 66% !important;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 10px 16px;
+    border-radius: 6px;
+    z-index: 1;
+  }
+  h1 {
+    font-size: 1.1rem;
+    padding: 0;
+    margin: 0 0 2px;
+    color: #ffffff !important;
+  }
+  .titulo-hero p {
+    font-size: .7rem;
+    margin: 2px 0 4px;
+    color: #ffffff !important;
+  }
+  .titulo-hero a {
+    display: inline-block;
+    min-height: 26px;
+    padding: 0 12px;
+    font-size: .7rem;
+    line-height: 26px;
+    margin-top: 0;
+    position: static !important;
+    color: #563f05;
   }
 
-  .post-it {
-    font-size: 0.7rem;
-    width: 95px;
-    min-height: 75px;
+  .secao {
+    padding: 22px 14px 26px;
+  }
+  .titulo-secao h2 {
+    font-size: 1.3rem;
+  }
+  .grade-alunos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .card strong {
+    font-size: .65rem;
+  }
+  .card em {
+    font-size: .5rem;
+    padding: 4px 2px;
+  }
+  .foto {
+    width: 52px;
+    height: 52px;
+  }
+  .notas {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .notas blockquote {
+    min-height: auto;
+    font-size: .7rem;
     padding: 10px;
   }
+  .mensagem-final {
+    padding: 22px 14px 26px;
+  }
+  .mensagem-final h2 {
+    font-size: 1.1rem;
+  }
+  .mensagem-final p {
+    font-size: .82rem;
+  }
+}
 
-  .post-it.azul,
-  .post-it.roxo {
-    bottom: 10px;
+/* Celular pequeno (até 380px) */
+@media (max-width: 380px) {
+  .topo {
+    padding: 6px 8px;
+  }
+  nav a {
+    font-size: .7rem;
+  }
+
+  .hero {
+    min-height: 320px;
+  }
+
+  .post {
+    width: 44px;
+    min-height: 36px;
+    padding: 2px 3px !important;
+    font-size: .38rem;
+  }
+  .post-azul { bottom: 10px; }
+  .post-lilas { bottom: 10px; }
+
+  .titulo-hero {
+    top: 64% !important;
+    padding: 6px 10px;
+  }
+  h1 {
+    font-size: .95rem;
+  }
+  .titulo-hero p {
+    font-size: .62rem;
+  }
+  .titulo-hero a {
+    min-height: 22px;
+    padding: 0 8px;
+    font-size: .62rem;
+    line-height: 22px;
+  }
+
+  .grade-alunos {
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  .foto {
+    width: 40px;
+    height: 40px;
   }
 }
