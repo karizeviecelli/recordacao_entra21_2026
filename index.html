@@ -212,6 +212,20 @@
     </main>
   </div>
 
+
+  <button class="toggle-tema" id="toggleTema" onclick="alternarTema()" aria-label="Alternar tema">
+  ☀️
+</button>
+
+<script>
+function alternarTema() {
+  document.body.classList.toggle('light-mode');
+  const btn = document.getElementById('toggleTema');
+  const isLight = document.body.classList.contains('light-mode');
+  btn.textContent = isLight ? '🌙' : '☀️';
+  btn.style.borderColor = isLight ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.15)';
+}
+</script>
   <script src="js/script.js"></script>
 </body>
 
